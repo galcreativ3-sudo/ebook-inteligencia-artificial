@@ -1,0 +1,535 @@
+<!DOCTYPE html><html lang="es"><head>
+<base href="https://uuck673ukxyyg.ok.kimi.link">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>IA Esencial para Emprendedores y Profesionales del Siglo XXI - Gal Creative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.179.1/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #3B82F6;
+            --accent: #2563EB;
+            --text: #1F2937;
+            --bg: #F8FAFC;
+            --emphasis: #DC2626;
+            --blue-light: #DBEAFE;
+            --blue-dark: #1E40AF;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+        
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95), rgba(59, 130, 246, 0.9)), 
+                        url('portada-ebook.png') center/cover;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .vanta-canvas { position: absolute; top: 0; left: 0; z-index: 1; }
+        .hero-content { position: relative; z-index: 2; }
+        
+        .chapter-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15);
+            border-color: var(--accent);
+        }
+        
+        .nav-sticky {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        }
+        
+        .progress-bar {
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .geometric-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(30, 58, 138, 0.1) 0%, transparent 50%);
+        }
+        
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(37, 99, 235, 0.6);
+                transform: scale(1.02);
+            }
+        }
+    </style>
+<script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script></head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 nav-sticky">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display text-xl font-bold text-gray-800">Gal Creative</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-blue-600 transition-colors">Inicio</a>
+                    <a href="#chapters" class="text-gray-600 hover:text-blue-600 transition-colors">Contenido</a>
+                    <a href="#course" class="text-gray-600 hover:text-blue-600 transition-colors">Curso</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contacto</a>
+                </div>
+                <button class="cta-button text-white px-6 py-2 rounded-full font-medium">
+                    Inscríbete al Curso
+                </button>
+            </div>
+        </div>
+        <div class="progress-bar" id="progressBar"></div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg flex items-center justify-center">
+        <div class="hero-content text-center text-white max-w-4xl mx-auto px-6">
+            <div class="floating-element mb-8">
+                <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    <span class="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                        IA Esencial
+                    </span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-light mb-8 text-gray-200">
+                    para Emprendedores y Profesionales del Siglo XXI
+                </h2>
+            </div>
+            
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Descubre cómo la Inteligencia Artificial puede transformar tu negocio, multiplicar tu productividad y darte la ventaja competitiva que necesitas
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+                <button class="cta-button text-white px-8 py-4 rounded-full text-lg font-medium pulse-glow">
+                    Comenzar Ahora
+                </button>
+                <div class="text-gray-300">
+                    <i class="fas fa-building mr-2"></i>
+                    Por <strong>Gal Creative</strong> - Tu aliado en transformación digital
+                </div>
+            </div>
+            
+            <div class="animate-bounce">
+                <i class="fas fa-chevron-down text-3xl text-blue-400"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section id="chapters" class="py-20 geometric-bg">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Contenido de Alto Valor
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Lo esencial que necesitas saber sobre Inteligencia Artificial para transformar tu negocio hoy mismo
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">El Poder de la IA Hoy</h3>
+                    <p class="text-gray-600 mb-6">Por qué la inteligencia artificial es crucial para tu éxito empresarial en 2025-2026</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 1</div>
+                </div>
+                
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">Conceptos Clave</h3>
+                    <p class="text-gray-600 mb-6">Los fundamentos que necesitas dominar para usar IA con confianza</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 2</div>
+                </div>
+                
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">Tendencias 2024</h3>
+                    <p class="text-gray-600 mb-6">Lo que está llegando y que no puedes ignorar si quieres estar adelante</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 3</div>
+                </div>
+                
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">Aplicación Inmediata</h3>
+                    <p class="text-gray-600 mb-6">Cómo implementar IA en tu negocio desde hoy mismo, paso a paso</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 4</div>
+                </div>
+                
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">Ética y Responsabilidad</h3>
+                    <p class="text-gray-600 mb-6">El lado humano de la IA y cómo usarla responsablemente</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 5</div>
+                </div>
+                
+                <div class="chapter-card rounded-2xl p-8 fade-in">
+                    <div class="text-blue-600 text-4xl mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="font-display text-2xl font-bold mb-4 text-gray-800">Próximos Pasos</h3>
+                    <p class="text-gray-600 mb-6">Tu roadmap para dominar la IA y transformar tu futuro profesional</p>
+                    <div class="text-sm text-blue-600 font-medium">Capítulo 6</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-display text-4xl font-bold text-gray-800 mb-6">Por Qué Este eBook Es Diferente</h2>
+                <p class="text-xl text-gray-600">Contenido práctico, directo y enfocado en resultados para tu negocio</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-clock text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-800 mb-4">Ahorra Tiempo</h3>
+                    <p class="text-gray-600">Aprende lo esencial de IA en pocas horas, no en meses de estudio teórico</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-chart-bar text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-800 mb-4">Multiplica Resultados</h3>
+                    <p class="text-gray-600">Implementa herramientas de IA que te den 10x más productividad inmediatamente</p>
+                </div>
+                
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-trophy text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="font-display text-xl font-bold text-gray-800 mb-4">Ventaja Competitiva</h3>
+                    <p class="text-gray-600">Adelántate a tu competencia con tecnología que pocos aún dominan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Preview -->
+    <section id="course" class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-display text-4xl font-bold text-gray-800 mb-6">¿Listos para el siguiente nivel?</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Este eBook es solo el comienzo. Nuestro curso intensivo te llevará de la teoría a la práctica total en 4 semanas.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h3 class="font-display text-2xl font-bold text-gray-800 mb-6">Lo que incluye el curso:</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm mt-1">
+                                1
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Módulo Fundacional</h4>
+                                <p class="text-gray-600">Dominio de herramientas de IA en 7 días</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm mt-1">
+                                2
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Implementación Inmediata</h4>
+                                <p class="text-gray-600">Proyecto real con IA desde la primera semana</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm mt-1">
+                                3
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Mentoría Personalizada</h4>
+                                <p class="text-gray-600">Sesiones grupales y soporte 24/7</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm mt-1">
+                                4
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Certificación Oficial</h4>
+                                <p class="text-gray-600">Reconocimiento Gal Creative en IA Aplicada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="bg-white rounded-2xl p-8 shadow-xl">
+                        <div class="text-center mb-6">
+                            <div class="text-4xl text-blue-600 mb-4">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-gray-800">Curso Intensivo</h3>
+                            <p class="text-gray-600">Transformación Digital con IA</p>
+                        </div>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">Dominio práctico de IA en 4 semanas</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">Herramientas que usarás desde el día 1</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">Plantillas y recursos descargables</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-green-500"></i>
+                                <span class="text-gray-700">Acceso a comunidad exclusiva</span>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full cta-button text-white py-4 rounded-full text-lg font-medium">
+                            Reservar Mi Plaza Ahora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800 text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="fade-in">
+                <h2 class="font-display text-4xl font-bold mb-6">¿Listos para transformar tu negocio?</h2>
+                <p class="text-xl text-gray-300 mb-12">
+                    La IA ya no es del futuro, es del presente. Y tú puedes empezar a usarla hoy mismo.
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-700 rounded-2xl p-8">
+                        <div class="text-4xl text-blue-400 mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4">Escríbenos</h3>
+                        <p class="text-gray-300 mb-4">¿Tienes preguntas sobre el curso?</p>
+                        <a href="mailto:galcreative@gmail.com" class="text-blue-400 hover:text-blue-300 font-medium">
+                            galcreativ3@gmail.com
+                        </a>
+                    </div>
+                    
+                    <div class="bg-gray-700 rounded-2xl p-8">
+                        <div class="text-4xl text-green-400 mb-4">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3 class="font-display text-2xl font-bold mb-4">WhatsApp</h3>
+                        <p class="text-gray-300 mb-4">Habla directamente con nuestro equipo</p>
+                        <a href="https://wa.me/50765448779?text=Hola%20Gal%20Creative%2C%20estoy%20interesado%20en%20el%20curso%20de%20IA%20Esencial" class="text-green-400 hover:text-green-300 font-medium">
+                            +507 6544-8779
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button class="cta-button text-white px-8 py-4 rounded-full text-lg font-medium">
+                        Comenzar Transformación
+                    </button>
+                    <a href="https://wa.me/50765448779?text=Hola%20Gal%20Creative%2C%20quiero%20más%20información%20sobre%20el%20curso%20de%20IA" class="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-full text-lg font-medium transition-all">
+                        Contactar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="mb-8">
+                <div class="font-display text-2xl font-bold text-blue-400 mb-4">Gal Creative</div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Transformamos negocios a través de la inteligencia artificial accesible y estratégica.
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="mailto:galcreativ3@gmail.com" class="text-gray-400 hover:text-blue-400 transition-colors">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+                <a href="https://wa.me/50765448779" class="text-gray-400 hover:text-green-400 transition-colors">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <p class="text-gray-500">
+                    © 2025 Gal Creative. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Vanta.js background
+        VANTA.NET({
+            el: ".hero-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x2563eb,
+            backgroundColor: 0x1e3a8a,
+            points: 8.00,
+            maxDistance: 25.00,
+            spacing: 18.00
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+        
+        // CTA button interactions
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                window.location.href = 'https://wa.me/50765448779?text=Hola%20Gal%20Creative%2C%20estoy%20interesado%20en%20el%20curso%20de%20IA%20Esencial%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n';
+            });
+        });
+    </script>
+
+</body></html>
